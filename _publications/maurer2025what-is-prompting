@@ -1,0 +1,23 @@
+---
+title: "What is Prompting?"
+collection: publications
+category: misc
+permalink: /publication/prompting-guide
+excerpt: 'The guide gives a systematic overview of different prompting methods, their differences, and combinations. On a running example, it illustrates differences and overlaps between prompting methods. It contextualizes common methods, such as few-shot prompting and chain-of-thought, and persona prompting. Finally, it closes with words of caution and practical recommendations on issues of privacy, model hallucinations, and prompt brittleness and robustness.'
+date: 2025-06-11
+venue: '(GESIS Guides to Digital Behavioral Data,'
+paperurl: 'https://www.gesis.org/fileadmin/admin/Dateikatalog/pdf/guides/25_Maurer_What_is_prompting.pdf'
+citation: 'Maurer, M. (2025). What is Prompting? (GESIS Guides to Digital Behavioral Data, 25). Cologne: GESIS – Leibniz Institute for the Social Sciences. https://doi.org/10.60762/ggdbd25025.1.0'
+---
+
+# Abstract
+This guide introduces the concept of prompting, that is, querying large language models
+(LLMs) using natural language. It presents and illustrates various prompting techniques
+with a running example, showcasing their differences and how they can be combined.
+Advanced techniques and concepts, such as reasoning models and persona prompting, are
+also discussed. The guide concludes with a non-exhaustive list of risks and limitations that
+users should be aware of. It is intended for users who have a basic conceptual
+understanding of LLMs and wish to learn about different ways of prompting them for
+research purposes.
+
+Keywords: large language models, LLMs, generative language models, prompting

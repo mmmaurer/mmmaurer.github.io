@@ -40,7 +40,14 @@ publist = {
         "venue-pretext" : "",
         "collection" : {"name":"publications",
                         "permalink":"/publication/"}
-    } 
+    },
+    "misc":{
+        "file": "misc.bib",
+        "venuekey" : "misc",
+        "venue-pretext" : "",
+        "collection" : {"name":"publications",
+                        "permalink":"/publication/"}
+    }
 }
 
 html_escape_table = {

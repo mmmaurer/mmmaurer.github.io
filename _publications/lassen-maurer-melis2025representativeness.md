@@ -16,9 +16,9 @@ The motivation for this is to invite more interdisciplinary conversations in the
 
 To assess the potential for increasing or reducing EI of representation in synthetic data for and from natural language processing applications, we first disentangle what we mean by representation. In this work, we focus on representation in the sense of whether identities and voices1 are accounted for in the data. Within this scope, we distinguish between two scenarios:
 
-    (a) Representation in data, where parts of identities are properly accounted for (e.g, augmentation of data for a named entity recognition system, where we add all theoretically possible first and last name combinations to ensure proper representation of the system’s outputs and performance (see e.g., Lassen et. al, 2023)
+(a) Representation in data, where parts of identities are properly accounted for (e.g, augmentation of data for a named entity recognition system, where we add all theoretically possible first and last name combinations to ensure proper representation of the system’s outputs and performance (see e.g., Lassen et. al, 2023)
     
-    (b) Representation by data, where identities themselves and their expression are being modeled (e.g., generating synthetic survey responses from different demographic groups, opinion generation based on political affiliations, or persona prompting with LLMs to simulate specific cultural perspectives (Hu and Collier, 2024; Giorgi et al., 2024; Hou et al., 2025, inter alia)).
+(b) Representation by data, where identities themselves and their expression are being modeled (e.g., generating synthetic survey responses from different demographic groups, opinion generation based on political affiliations, or persona prompting with LLMs to simulate specific cultural perspectives (Hu and Collier, 2024; Giorgi et al., 2024; Hou et al., 2025, inter alia)).
 
 While their potential broader impacts should be inspected for both scenarios, we focus on (b) in the following. Representation by data poses more pressing questions about EI because these approaches directly model people’s identities and voices, yet their impacts remain relatively under-researched despite growing popularity. Moreover, risks are growing more salient with increasing amounts of AI-generated content populating the web (Brooks et al., 2024; Spennemann, 2025).
 
@@ -42,48 +42,48 @@ Brooks, C., Eggert, S., & Peskoff, D. (2024). The rise of AI-generated content i
 In L. Lucie-Aimée, A. Fan, T. Gwadabe, I. Johnson, F. Petroni, & D. van Strien (Eds.),
 Proceedings of the First Workshop on Advancing Natural Language Processing for
 Wikipedia (pp. 67–79). Association for Computational Linguistics.
-https://doi.org/10.18653/v1/2024.wikinlp-1.12
+[https://doi.org/10.18653/v1/2024.wikinlp-1.12](https://doi.org/10.18653/v1/2024.wikinlp-1.12)
 
 Fricker, M. (2007). Epistemic injustice: Power and the ethics of knowing. Oxford University
-Press. https://doi.org/10.1093/acprof:oso/9780198237907.001.0001
+Press. [https://doi.org/10.1093/acprof:oso/9780198237907.001.0001](https://doi.org/10.1093/acprof:oso/9780198237907.001.0001)
 
 Giorgi, S., Liu, T., Aich, A., Isman, K. J., Sherman, G., Fried, Z., Sedoc, J., Ungar, L., &
 Curtis, B. (2024). Modeling human subjectivity in LLMs using explicit and implicit human
 factors in personas. In Y. Al-Onaizan, M. Bansal, & Y.-N. Chen (Eds.), Findings of the
 Association for Computational Linguistics: EMNLP 2024 (pp. 7174–7188). Association for
-Computational Linguistics. https://doi.org/10.18653/v1/2024.findings-emnlp.420
+Computational Linguistics. [https://doi.org/10.18653/v1/2024.findings-emnlp.420](https://doi.org/10.18653/v1/2024.findings-emnlp.420)
 
 Hämäläinen, P., Tavast, M., & Kunnari, A. (2023). Evaluating large language models in
 generating synthetic HCI research data: A case study. In Proceedings of the 2023 CHI
 Conference on Human Factors in Computing Systems (Article 433, 19 pages). Association
-for Computing Machinery. https://doi.org/10.1145/3544548.3580688
+for Computing Machinery. [https://doi.org/10.1145/3544548.3580688](https://doi.org/10.1145/3544548.3580688)
 
 Hou, Y., Daume, H. III., & Rudinger, R. (2025). Language models predict empathy gaps
 between social in-groups and out-groups. In Proceedings of the 2025 Conference of the
 Nations of the Americas Chapter of the Association for Computational Linguistics: Human
 Language Technologies (Volume 1: Long Papers) (pp. 12288–12304). Association for
-Computational Linguistics. https://aclanthology.org/2025.naacl-long.611/
+Computational Linguistics. [https://aclanthology.org/2025.naacl-long.611/](https://aclanthology.org/2025.naacl-long.611/)
 
 Hu, T., & Collier, N. (2024). Quantifying the persona effect in LLM simulations. In L.-W. Ku,
 A. Martins, & V. Srikumar (Eds.), Proceedings of the 62nd Annual Meeting of the Association
 for Computational Linguistics (Volume 1: Long Papers) (pp. 10289–10307). Association for
-Computational Linguistics. https://doi.org/10.18653/v1/2024.acl-long.554
+Computational Linguistics. [https://doi.org/10.18653/v1/2024.acl-long.554](https://doi.org/10.18653/v1/2024.acl-long.554)
 
 Lassen, I. M. S., Almasi, M., Enevoldsen, K., & Kristensen-McLachlan, R. D. (2023).
 Detecting intersectionality in NER models: A data-driven approach. In S. Degaetano-Ortlieb,
 A. Kazantseva, N. Reiter, & S. Szpakowicz (Eds.), Proceedings of the 7th Joint SIGHUM
 Workshop on Computational Linguistics for Cultural Heritage, Social Sciences, Humanities
 and Literature (pp. 116–127). Association for Computational Linguistics.
-https://doi.org/10.18653/v1/2023.latechclfl-1.13
+[https://doi.org/10.18653/v1/2023.latechclfl-1.13](https://doi.org/10.18653/v1/2023.latechclfl-1.13)
 
 Moon, S., Abdulhai, M., Kang, M., Suh, J., Soedarmadji, W., Behar, E. K., & Chan, D. (2024).
 Virtual personas for language models via an anthology of backstories. In Y. Al-Onaizan, M.Bansal, & Y.-N. Chen (Eds.), Proceedings of the 2024 Conference on Empirical Methods in
 Natural Language Processing (pp. 19864–19897). Association for Computational Linguistics.
-https://doi.org/10.18653/v1/2024.emnlp-main.1110
+[https://doi.org/10.18653/v1/2024.emnlp-main.1110](https://doi.org/10.18653/v1/2024.emnlp-main.1110)
 
 Spennemann, D. H. R. (2025). Delving into: The quantification of AI-generated content on
-the internet (synthetic data). arXiv. https://arxiv.org/abs/2504.08755
+the internet (synthetic data). arXiv. [https://arxiv.org/abs/2504.08755](https://arxiv.org/abs/2504.08755)
 
 Wang, A., Morgenstern, J., & Dickerson, J. P. (2025). Large language models that replace
 human participants can harmfully misportray and flatten identity groups. Nature Machine
-Intelligence, 7(3), 400–411. https://doi.org/10.1038/s42256-025-00986-z
+Intelligence, 7(3), 400–411. [https://doi.org/10.1038/s42256-025-00986-z](https://doi.org/10.1038/s42256-025-00986-z)

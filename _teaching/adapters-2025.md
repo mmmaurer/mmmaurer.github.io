@@ -1,7 +1,7 @@
 ---
 title: "Adapters: Lightweight Machine Learning for Social Science Research"
 collection: teaching
-type: "Undergraduate course"
+type: "Block Course"
 permalink: /teaching/adapters-2025
 venue: "GESIS Training"
 date: 2014-06-02
