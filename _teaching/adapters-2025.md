@@ -4,7 +4,7 @@ collection: teaching
 type: "Block Course"
 permalink: /teaching/adapters-2025
 venue: "GESIS Training"
-date: 2014-06-02
+date: 2025-06-02
 location: "online"
 ---
 
