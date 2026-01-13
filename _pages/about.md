@@ -8,7 +8,7 @@ redirect_from:
 ---
 
 # Quick Bio
-I'm a third year PhD student in the Data Science Methods team in the [Compuatational Social Science department](https://www.gesis.org/en/institute/about-us/departments/computational-social-science) at GESIS - Leibniz Institute for the Social Sciences in Cologne, Germany, and at Heinrich Heine University Düsseldorf.
+I'm a third year PhD student in the Data Science Methods team in the [Computational Social Science department](https://www.gesis.org/en/institute/about-us/departments/computational-social-science) at GESIS - Leibniz Institute for the Social Sciences in Cologne, Germany, and at Heinrich Heine University Düsseldorf.
 
 On the one hand, my research interests include linguistic and annotator factors of (dis)agreement in text annotation and downstream effects on model behavior, in particular for subjective phenomena.
 In this context, with colleagues, we investigated the role of linguistic features in personalized argument retrieval (see [Maurer et al., 2024](https://aclanthology.org/2024.argmining-1.18/)), and discussed the effects of group-level annotation behavior on group transfer performance ceilings for argument quality prediction (see the pilot study in [Romberg et al., 2025](https://aclanthology.org/2025.naacl-long.382/)).
