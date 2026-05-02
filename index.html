@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academic Profile</title>
+    <title>Maximilian Maurer's Website</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -70,30 +70,161 @@
                     <article class="publication">
                         <h3><a href="https://aclanthology.org/2026.eacl-demo.5/">elfen: A Python Package for Efficient Linguistic Feature Extraction for Natural Language Datasets</a></h3>
                         <p class="publication-meta"><strong>Maurer</strong>. EACL 2026 (System Demonstrations), Rabat, Morocco.</p>
+                        <div class="pub-buttons">
+                            <a class="btn" href="https://aclanthology.org/2026.eacl-demo.5/" target="_blank" rel="noopener">Paper</a>
+                            <button class="btn bib-btn" data-bib-id="bib-maurer-2026-elfen">BibTeX</button>
+                            <a class="btn" href="https://github.com/mmmaurer/elfen" target="_blank" rel="noopener">Code</a>
+                            <a class="btn" href="assets/pdf/posters/elfen_poster.pdf" target="_blank" rel="noopener">Poster</a>
+                        </div>
+                        <pre class="bibtex" id="bib-maurer-2026-elfen" style="display:none">@inproceedings{maurer-2026-elfen,
+    title = "{elfen: A Python Package for Efficient Linguistic Feature Extraction for Natural Language Datasets}",
+    author = "Maurer, Maximilian",
+    editor = "Croce, Danilo  and
+      Leidner, Jochen  and
+      Moosavi, Nafise Sadat",
+    booktitle = "Proceedings of the 19th Conference of the {E}uropean Chapter of the {A}ssociation for {C}omputational {L}inguistics (Volume 3: System Demonstrations)",
+    month = mar,
+    year = "2026",
+    address = "Rabat, Marocco",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2026.eacl-demo.5/",
+    doi = "10.18653/v1/2026.eacl-demo.5",
+    pages = "61--74",
+    ISBN = "979-8-89176-382-1",
+    abstract = "A detailed understanding of the basic properties of text collections produced by humans or generated synthetically is vital for all steps of the natural language processing system life cycle, from training to evaluating model performance and synthetic texts.To facilitate the analysis of these properties, we introduce elfen, a Python library for efficient linguistic feature extraction for text datasets. It includes the largest set of item-level linguistic features in eleven feature areas: surface-level, POS, lexical richness, readability, named entity, semantic, information-theoretic, emotion, psycholinguistic, dependency, and morphological features. Building on top of popular NLP and modern dataframe libraries, elfen enables feature extraction in various languages (80 at the moment) on thousands of items, even given limited computing resources. We show how using elfen enables linguistically informed data selection, outlier detection, and text collection comparison.We release elfen as an open-source PyPI package, accompanied by extensive documentation, including tutorials. We host the code at https://github.com/mmmaurer/elfen/, make it available through the GESIS Methods Hub at https://methodshub.gesis.org/library/methods/elfen/, and provide documentation and tutorials at https://elfen.readthedocs.io/en/latest/."
+</pre>
                     </article>
                     <article class="publication">
                         <h3><a href="https://aclanthology.org/2025.emnlp-main.1755/">AI Argues Differently: Distinct Argumentative and Linguistic Patterns of LLMs in Persuasive Contexts</a></h3>
                         <p class="publication-meta">Dönmez*, <strong>Maurer*</strong>, Lapesa, and Falenska. EMNLP 2025, Suzhou, China.</p>
+                        <div class="pub-buttons">
+                            <a class="btn" href="https://aclanthology.org/2025.emnlp-main.1755/" target="_blank" rel="noopener">Paper</a>
+                            <button class="btn bib-btn" data-bib-id="bib-donmez-etal-2025-ai">BibTeX</button>
+                            <a class="btn" href="https://github.com/esradonmez/ai-argues-differently" target="_blank" rel="noopener">Code</a>
+                            <a class="btn" href="assets/pdf/posters/ai_argues_differently.pdf" target="_blank" rel="noopener">Poster</a>
+                            <a class="btn" href="assets/pdf/slides/ai-argues-differently.pdf" target="_blank" rel="noopener">Slides</a>
+                        </div>
+                        <pre class="bibtex" id="bib-donmez-etal-2025-ai" style="display:none">@inproceedings{donmez-etal-2025-ai,
+    title = "{AI} Argues Differently: Distinct Argumentative and Linguistic Patterns of {LLM}s in Persuasive Contexts",
+    author = {D{"o}nmez*, Esra  and
+      Maurer*, Maximilian  and
+      Lapesa, Gabriella  and
+      Falenska, Agnieszka},
+    editor = "Christodoulopoulos, Christos  and
+      Chakraborty, Tanmoy  and
+      Rose, Carolyn  and
+      Peng, Violet",
+    booktitle = "Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2025",
+    address = "Suzhou, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.emnlp-main.1755/",
+    doi = "10.18653/v1/2025.emnlp-main.1755",
+    pages = "34583--34614",
+    ISBN = "979-8-89176-332-6",
+    abstract = "Distinguishing LLM-generated text from human-written is a key challenge for safe and ethical NLP, particularly in high-stake settings such as persuasive online discourse. While recent work focuses on detection, real-world use cases also demand interpretable tools to help humans understand and distinguish LLM-generated texts. To this end, we present an analysis framework comparing human- and LLM-authored arguments using two easily-interpretable feature sets: general-purpose linguistic features (e.g., lexical richness, syntactic complexity) and domain-specific features related to argument quality (e.g., logical soundness, engagement strategies). Applied to */r/ChangeMyView* arguments by humans and three LLMs, our method reveals clear patterns: LLM-generated counter-arguments show lower type-token and lemma-token ratios but higher emotional intensity {---} particularly in anticipation and trust. They more closely resemble textbook-quality arguments {---} cogent, justified, explicitly respectful toward others, and positive in tone. Moreover, counter-arguments generated by LLMs converge more closely with the original post{'}s style and quality than those written by humans. Finally, we demonstrate that these differences enable a lightweight, interpretable, and highly effective classifier for detecting LLM-generated comments in CMV."
+</pre>
                     </article>
-                    <!-- <article class="publication">
-                        <h3><a href="https://doi.org/10.60762/ggdbd25025.1.0">What is Prompting?</a></h3>
-                        <p class="publication-meta"><strong>Maurer, Maximilian</strong>. GESIS Guides to Digital Behavioral Data, Vol. 25, 2025.</p>
-                    </article> -->
                     <article class="publication">
                         <h3><a href="https://aclanthology.org/2025.naacl-long.382/">Towards a Perspectivist Turn in Argument Quality Assessment</a></h3>
                         <p class="publication-meta">Romberg, <strong>Maurer</strong>, Wachsmuth, and Lapesa. NAACL 2025, Albuquerque, New Mexico.</p>
+                        <div class="pub-buttons">
+                            <a class="btn" href="https://aclanthology.org/2025.naacl-long.382/" target="_blank" rel="noopener">Paper</a>
+                            <button class="btn bib-btn" data-bib-id="bib-romberg-etal-2025-towards">BibTeX</button>
+                            <a class="btn" href="https://github.com/juliaromberg/perspectivist-turn-aq" target="_blank" rel="noopener">Code</a>
+                        </div>
+                        <pre class="bibtex" id="bib-romberg-etal-2025-towards" style="display:none">@inproceedings{romberg-etal-2025-towards,
+    title = "Towards a Perspectivist Turn in Argument Quality Assessment",
+    author = "Romberg, Julia  and
+      Maurer, Maximilian  and
+      Wachsmuth, Henning  and
+      Lapesa, Gabriella",
+    booktitle = "Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers)",
+    month = apr,
+    year = "2025",
+    address = "Albuquerque, New Mexico",
+    url = "https://aclanthology.org/2025.naacl-long.382/",
+    doi = "10.18653/v1/2025.naacl-long.382",
+    pages = "7458--7485",
+    ISBN = "979-8-89176-189-6",
+    abstract = "The assessment of argument quality depends on well-established logical, rhetorical, and dialectical properties that are unavoidably subjective: multiple valid assessments may exist, there is no unequivocal ground truth. This aligns with recent paths in machine learning, which embrace the co-existence of different perspectives. However, this potential remains largely unexplored in NLP research on argument quality. One crucial reason seems to be the yet unexplored availability of suitable datasets. We fill this gap by conducting a systematic review of argument quality datasets. We assign them to a multi-layered categorization targeting two aspects: (a) What has been annotated: we collect the quality dimensions covered in datasets and consolidate them in an overarching taxonomy, increasing dataset comparability and interoperability. (b) Who annotated: we survey what information is given about annotators, enabling perspectivist research and grounding our recommendations for future actions. To this end, we discuss datasets suitable for developing perspectivist models (i.e., those containing individual, non-aggregated annotations), and we showcase the importance of a controlled selection of annotators in a pilot study."
+</pre>
                     </article>
                     <article class="publication">
                         <h3><a href="https://aclanthology.org/2024.argmining-1.18/">GESIS-DSM at PerspectiveArg2024: A Matter of Style? Socio-Cultural Differences in Argumentation</a></h3>
                         <p class="publication-meta"><strong>Maurer</strong>, Romberg, Reuver, Weldekiros and Lapesa. ArgMining 2024, Bangkok, Thailand.</p>
+                        <div class="pub-buttons">
+                            <a class="btn" href="https://aclanthology.org/2024.argmining-1.18/" target="_blank" rel="noopener">Paper</a>
+                            <button class="btn bib-btn" data-bib-id="bib-maurer-etal-2024-gesis">BibTeX</button>
+                            <a class="btn" href="https://github.com/mmmaurer/perspective_argument_retrieval" target="_blank" rel="noopener">Code</a>
+                            <a class="btn" href="assets/pdf/slides/gesis-dsm-at-perspectivearg.pdf" target="_blank" rel="noopener">Slides</a>
+                        </div>
+                        <pre class="bibtex" id="bib-maurer-etal-2024-gesis" style="display:none">@inproceedings{maurer-etal-2024-gesis,
+    title = "{GESIS}-{DSM} at {P}erpective{A}rg2024: A Matter of Style? Socio-Cultural Differences in Argumentation",
+    author = "Maurer, Maximilian  and
+      Romberg, Julia  and
+      Reuver, Myrthe  and
+      Weldekiros, Negash  and
+      Lapesa, Gabriella",
+    booktitle = "Proceedings of the 11th Workshop on Argument Mining (ArgMining 2024)",
+    month = aug,
+    year = "2024",
+    address = "Bangkok, Thailand",
+    url = "https://aclanthology.org/2024.argmining-1.18/",
+    doi = "10.18653/v1/2024.argmining-1.18",
+    pages = "169--181",
+    abstract = "This paper describes the contribution of team GESIS-DSM to the Perspective Argument Retrieval Task, a task on retrieving socio-culturally relevant and diverse arguments for different user queries. Our experiments and analyses aim to explore the nature of the socio-cultural specialization in argument retrieval: (how) do the arguments written by different socio-cultural groups differ? We investigate the impact of content and style for the task of identifying arguments relevant to a query and a certain demographic attribute. In its different configurations, our system employs sentence embedding representations, arguments generated with Large Language Model, as well as stylistic features. final method places third overall in the shared task, and, in comparison, does particularly well in the most difficult evaluation scenario, where the socio-cultural background of the argument author is implicit (i.e. has to be inferred from the text). This result indicates that socio-cultural differences in argument production may indeed be a matter of style."
+</pre>
                     </article>
                     <article class="publication">
                         <h3><a href="https://aclanthology.org/2024.findings-emnlp.354/">Toeing the Party Line: Election Manifestos as a Key to Understand Political Discourse on Twitter</a></h3>
                         <p class="publication-meta"><strong>Maurer</strong>, Ceron, Padó, and Lapesa. Findings of EMNLP 2024, Miami, Florida.</p>
+                        <div class="pub-buttons">
+                            <a class="btn" href="https://aclanthology.org/2024.findings-emnlp.354/" target="_blank" rel="noopener">Paper</a>
+                            <button class="btn bib-btn" data-bib-id="bib-maurer-etal-2024-toeing">BibTeX</button>
+                            <a class="btn" href="https://github.com/mmmaurer/toeing-the-party-line" target="_blank" rel="noopener">Code</a>
+                            <a class="btn" href="assets/pdf/posters/toeing-the-party-line_poster.pdf" target="_blank" rel="noopener">Poster</a>
+                            <a class="btn" href="assets/pdf/slides/toeing-the-party-line_pres.pdf" target="_blank" rel="noopener">Slides</a>
+                        </div>
+                        <pre class="bibtex" id="bib-maurer-etal-2024-toeing" style="display:none">@inproceedings{maurer-etal-2024-toeing,
+    title = "Toeing the Party Line: Election Manifestos as a Key to Understand Political Discourse on {T}witter",
+    author = "Maurer, Maximilian  and
+      Ceron, Tanise  and
+      Pad{\\'o}, Sebastian  and
+      Lapesa, Gabriella",
+    booktitle = "Findings of the Association for Computational Linguistics: EMNLP 2024",
+    month = nov,
+    year = "2024",
+    address = "Miami, Florida, USA",
+    url = "https://aclanthology.org/2024.findings-emnlp.354/",
+    doi = "10.18653/v1/2024.findings-emnlp.354",
+    pages = "6115--6130",
+    abstract = "Political discourse on Twitter is a moving target: politicians continuously make statements about their positions. It is therefore crucial to track their discourse on social media to understand their ideological positions and goals. However, Twitter data is also challenging to work with since it is ambiguous and often dependent on social context, and consequently, recent work on political positioning has tended to focus strongly on manifestos (parties' electoral programs) rather than social media.In this paper, we extend recently proposed methods to predict pairwise positional similarities between parties from the manifesto case to the Twitter case, using hashtags as a signal to fine-tune text representations, without the need for manual annotation. We verify the efficacy of fine-tuning and conduct a series of experiments that assess the robustness of our method for low-resource scenarios. We find that our method yields stable positionings reflective of manifesto positionings, both in scenarios with all tweets of candidates across years available and when only smaller subsets from shorter time periods are available. This indicates that it is possible to reliably analyze the relative positioning of actors without the need for manual annotation, even in the noisier context of social media."
+</pre>
                     </article>
                     <article class="publication">
                         <h3><a href="https://aclanthology.org/2023.konvens-main.4/">Classifying Noun Compounds for Present-Day Compositionality: Contributions of Diachronic Frequency and Productivity Patterns</a></h3>
                         <p class="publication-meta"><strong>Maurer</strong>, Jenkins, Miletić, and Schulte im Walde. KONVENS 2023, Ingolstadt, Germany.</p>
+                        <div class="pub-buttons">
+                            <a class="btn" href="https://aclanthology.org/2023.konvens-main.4/" target="_blank" rel="noopener">Paper</a>
+                            <button class="btn bib-btn" data-bib-id="bib-maurer-etal-2023-classifying">BibTeX</button>
+                            <a class="btn" href="assets/pdf/slides/classifying-noun-compounds.pdf" target="_blank" rel="noopener">Slides</a>
+                        </div>
+                        <pre class="bibtex" id="bib-maurer-etal-2023-classifying" style="display:none">@inproceedings{maurer-etal-2023-classifying,
+    title = "Classifying Noun Compounds for Present-Day Compositionality: Contributions of Diachronic Frequency and Productivity Patterns",
+    author = "Maurer, Maximilian  and
+      Jenkins, Chris  and
+      Mileti{\\'c}, Filip  and
+      Schulte im Walde, Sabine",
+    booktitle = "Proceedings of the 19th Conference on Natural Language Processing (KONVENS 2023)",
+    month = sep,
+    year = "2023",
+    address = "Ingolstadt, Germany",
+    url = "https://aclanthology.org/2023.konvens-main.4/",
+    pages = "40--51"
+}
+</pre>
                     </article>
                 </div>
             </section>
@@ -120,6 +251,29 @@
             const newTheme = theme === 'light' ? 'dark' : 'light';
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
+        });
+
+        // BibTeX copy buttons
+        document.addEventListener('click', async (e) => {
+            const btn = e.target.closest('.bib-btn');
+            if (!btn) return;
+            const bibId = btn.getAttribute('data-bib-id');
+            if (!bibId) return;
+            const pre = document.getElementById(bibId);
+            if (!pre) return;
+            const bibText = pre.textContent.trim();
+            try {
+                await navigator.clipboard.writeText(bibText);
+                const old = btn.textContent;
+                btn.textContent = 'Copied!';
+                btn.disabled = true;
+                setTimeout(() => {
+                    btn.textContent = old;
+                    btn.disabled = false;
+                }, 1800);
+            } catch (err) {
+                alert('Copy failed. You can manually select and copy the BibTeX.');
+            }
         });
     </script>
 </body>

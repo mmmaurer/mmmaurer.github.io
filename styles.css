@@ -307,6 +307,36 @@ html[data-theme="dark"] .toggle-circle {
     transition: color 0.3s ease;
 }
 
+/* Publication buttons */
+.pub-buttons {
+    margin-top: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.35rem 0.6rem;
+    background-color: var(--accent-color);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: var(--accent-dark);
+}
+
+.bibtex {
+    white-space: pre-wrap;
+    font-family: monospace;
+    font-size: 0.85rem;
+}
+
 /* Contact Section */
 .contact-info {
     background-color: var(--bg-primary);
