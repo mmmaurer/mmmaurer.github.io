@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example Blog Post (ex2) - Maximilian Maurer's Website</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Side Navigation -->
+        <nav class="sidebar">
+            <div class="nav-content">
+                <ul class="nav-list">
+                    <li><a href="../index.html#about" class="nav-link">About</a></li>
+                    <li><a href="../index.html#publications" class="nav-link">Publications</a></li>
+                    <li><a href="../blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="nav-right">
+                    <div class="social-icons">
+                        <a href="https://scholar.google.com/citations?user=gKqjcwEAAAAJ" class="social-link" title="Google Scholar">
+                            <img src="../assets/icons/gsch.svg" alt="Google Scholar">
+                        </a>
+                        <a href="https://github.com/mmmaurer" class="social-link" title="GitHub">
+                            <img src="../assets/icons/github.svg" alt="GitHub">
+                        </a>
+                        <a href="https://bsky.app/profile/mmmaurer.bsky.social" class="social-link" title="Bluesky">
+                            <img src="../assets/icons/bsky.svg" alt="Bluesky">
+                        </a>
+                        <a href="https://www.linkedin.com/in/maximilian-martin-maurer-217591268/" class="social-link" title="LinkedIn">
+                            <img src="../assets/icons/linkedin.svg" alt="LinkedIn">
+                        </a>
+                    </div>
+                    <button id="theme-toggle" class="theme-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">
+                        <span class="toggle-circle">
+                            <img src="../assets/icons/sun.svg" alt="Light mode" class="theme-icon theme-icon-sun">
+                            <img src="../assets/icons/moon.svg" alt="Dark mode" class="theme-icon theme-icon-moon">
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Blog Post Section -->
+            <article class="section blog-post">
+                <div class="blog-post-header">
+                    <h1>Example Blog Post (ex2)</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-date">May 2, 2026</span>
+                        <div class="blog-tags">
+                            <a href="tags.html?tag=blog" class="blog-tag">blog</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-post-content">
+                    <p>This is only for testing purposes. It serves as a template for future posts and demonstrates the structure and formatting that can be used in our blogging platform.</p>
+                </div>
+
+                <div class="blog-post-footer">
+                    <a href="../blog.html" class="back-to-blog">← Back to Blog</a>
+                </div>
+            </article>
+        </main>
+    </div>
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const theme = html.getAttribute('data-theme');
+            const newTheme = theme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    </script>
+</body>
+</html>
