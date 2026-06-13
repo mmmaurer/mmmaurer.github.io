@@ -85,6 +85,23 @@ def wrap_images(html: str) -> str:
     return re.sub(r"<img\b[^>]*>", _wrap, html)
 
 
+def _find_attachment(fname: str, src: Path) -> Path | None:
+    """
+    Locate an attachment by walking up from the source file's directory,
+    checking for an 'attachments' subfolder at each level.
+    Obsidian typically stores pasted images at the vault root's attachments/.
+    """
+    directory = src.parent
+    while True:
+        candidate = directory / "attachments" / fname
+        if candidate.exists():
+            return candidate
+        parent = directory.parent
+        if parent == directory:
+            return None
+        directory = parent
+
+
 def format_date(val) -> str:
     """Format a date or ISO string to 'Month D, YYYY'."""
     if isinstance(val, str):
@@ -271,10 +288,6 @@ def main() -> None:
     parser.add_argument("input", help="Path to the Obsidian Markdown file")
     args = parser.parse_args()
 
-    # vault_attachments is ../attachments relative to the blog post,
-    # so we need to resolve it against the input file's parent directory
-    vault_attachments = (Path(args.input).parent / "attachments").expanduser().resolve()
-
     src = Path(args.input).expanduser().resolve()
     if not src.exists():
         sys.exit(f"Error: file not found: {src}")
@@ -292,12 +305,12 @@ def main() -> None:
     if image_files:
         ASSETS_BLOG_IMG.mkdir(parents=True, exist_ok=True)
         for fname in image_files:
-            src_img = vault_attachments / fname
-            if src_img.exists():
+            src_img = _find_attachment(fname, src)
+            if src_img is not None:
                 shutil.copy2(src_img, ASSETS_BLOG_IMG / fname)
                 print(f"  Copied: {fname}")
             else:
-                print(f"  Warning: attachment not found: {src_img}", file=sys.stderr)
+                print(f"  Warning: attachment not found: {fname}", file=sys.stderr)
 
     # Convert Markdown → HTML
     converter = md_lib.Markdown(extensions=["extra", "smarty"])
