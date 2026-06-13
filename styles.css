@@ -502,6 +502,77 @@ html[data-theme="dark"] .toggle-circle {
     text-decoration: underline;
 }
 
+/* Blog post images — responsive + zoom */
+.blog-post-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+}
+
+.blog-img-wrap {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    line-height: 0;
+    cursor: zoom-in;
+}
+
+.zoom-btn {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    width: 32px;
+    height: 32px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.blog-img-wrap:hover .zoom-btn {
+    opacity: 1;
+}
+
+.zoom-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+}
+
+.lightbox.open {
+    display: flex;
+}
+
+.lightbox img {
+    max-width: 92vw;
+    max-height: 92vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+    cursor: default;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .nav-content {
