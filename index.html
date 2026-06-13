@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maximilian Maurer's Website</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="assets/icons/convo.png" type="image/png">
 </head>
 <body>
     <div class="container">
@@ -13,6 +14,7 @@
             <div class="nav-content">
                 <ul class="nav-list">
                     <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#news" class="nav-link">News</a></li>
                     <li><a href="index.html#publications" class="nav-link">Publications</a></li>
                     <li><a href="blog.html" class="nav-link">Blog</a></li>
                     <li><a href="index.html#contact" class="nav-link">Contact</a></li>
@@ -24,6 +26,9 @@
                         </a>
                         <a href="https://github.com/mmmaurer" class="social-link" title="GitHub">
                             <img src="assets/icons/github.svg" alt="GitHub">
+                        </a>
+                        <a href="https://codeberg.org/mmmaurer" class="social-link" title="Codeberg">
+                            <img src="assets/icons/codeberg.svg" alt="Codeberg">
                         </a>
                         <a href="https://bsky.app/profile/mmmaurer.bsky.social" class="social-link" title="Bluesky">
                             <img src="assets/icons/bsky.svg" alt="Bluesky">
@@ -64,9 +69,31 @@
                 </div>
             </section>
 
+            <!-- News Section -->
+            <section id="news" class="section">
+                <h2>News</h2>
+                <div class="news-list" id="news-list">
+                    <article class="news-item">
+                        <p class="news-date"><strong>2026-06-06</strong></p>
+                        <p>I gave an invited talk in Bamberg in the research seminar of the Fundamentals of Natural Language Processing group. </p>
+                        <div class="pub-buttons">
+                            <a class="btn" href="assets/pdf/slides/Invited_Talk_Bamberg.pdf" target="_blank" rel="noopener">Slides</a>
+                        </div>
+                    </article>
+                </div>
+                <div>
+                    <button id="news-toggle" class="btn news-more-btn" aria-expanded="false" style="display:none">More</button>
+                </div>
+            </section>
+
             <!-- Publications Section -->
             <section id="publications" class="section">
                 <h2>Publications</h2>
+                <div class="publications-cta" style="margin-bottom:0.75rem;">
+                    <a class="btn" href="https://scholar.google.com/citations?user=gKqjcwEAAAAJ" target="_blank" rel="noopener noreferrer">
+                        <img src="assets/icons/gsch.svg" alt="Google Scholar" style="width:18px;height:18px;vertical-align:middle;margin-right:8px;">See my full list of publications on Google Scholar
+                    </a>
+                </div>
                 <div class="publication-list">
                     <article class="publication">
                         <h3><a href="https://aclanthology.org/2026.eacl-demo.5/">elfen: A Python Package for Efficient Linguistic Feature Extraction for Natural Language Datasets</a></h3>
@@ -275,6 +302,35 @@
             } catch (err) {
                 alert('Copy failed. You can manually select and copy the BibTeX.');
             }
+        });
+
+        // News list: show only latest 3 items by default, toggle to show more
+        document.addEventListener('DOMContentLoaded', () => {
+            const newsList = document.getElementById('news-list');
+            const toggleBtn = document.getElementById('news-toggle');
+            if (!newsList || !toggleBtn) return;
+            const items = Array.from(newsList.querySelectorAll('.news-item'));
+            const maxVisible = 3;
+            if (items.length <= maxVisible) {
+                toggleBtn.style.display = 'none';
+                return;
+            }
+            const hiddenItems = items.slice(maxVisible);
+            hiddenItems.forEach(i => i.classList.add('hidden'));
+            toggleBtn.style.display = '';
+            toggleBtn.textContent = `More (${hiddenItems.length})`;
+            toggleBtn.addEventListener('click', () => {
+                const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+                if (expanded) {
+                    hiddenItems.forEach(i => i.classList.add('hidden'));
+                    toggleBtn.textContent = `More (${hiddenItems.length})`;
+                    toggleBtn.setAttribute('aria-expanded', 'false');
+                } else {
+                    hiddenItems.forEach(i => i.classList.remove('hidden'));
+                    toggleBtn.textContent = 'Less';
+                    toggleBtn.setAttribute('aria-expanded', 'true');
+                }
+            });
         });
     </script>
 </body>

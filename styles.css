@@ -548,3 +548,12 @@ html[data-theme="dark"] .toggle-circle {
         height: 150px;
     }
 }
+
+/* News list helpers */
+.news-list .news-item.hidden {
+    display: none;
+}
+
+.news-more-btn {
+    margin-top: 0.75rem;
+}
