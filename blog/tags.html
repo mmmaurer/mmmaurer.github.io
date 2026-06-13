@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tags - Maximilian Maurer's Website</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <div class="nav-content">
+                <ul class="nav-list">
+                    <li><a href="../index.html#about" class="nav-link">About</a></li>
+                    <li><a href="../index.html#publications" class="nav-link">Publications</a></li>
+                    <li><a href="../blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="nav-right">
+                    <div class="social-icons">
+                        <a href="https://scholar.google.com/citations?user=gKqjcwEAAAAJ" class="social-link" title="Google Scholar">
+                            <img src="../assets/icons/gsch.svg" alt="Google Scholar">
+                        </a>
+                        <a href="https://github.com/mmmaurer" class="social-link" title="GitHub">
+                            <img src="../assets/icons/github.svg" alt="GitHub">
+                        </a>
+                        <a href="https://bsky.app/profile/mmmaurer.bsky.social" class="social-link" title="Bluesky">
+                            <img src="../assets/icons/bsky.svg" alt="Bluesky">
+                        </a>
+                        <a href="https://www.linkedin.com/in/maximilian-martin-maurer-217591268/" class="social-link" title="LinkedIn">
+                            <img src="../assets/icons/linkedin.svg" alt="LinkedIn">
+                        </a>
+                    </div>
+                    <button id="theme-toggle" class="theme-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">
+                        <span class="toggle-circle">
+                            <img src="../assets/icons/sun.svg" alt="Light mode" class="theme-icon theme-icon-sun">
+                            <img src="../assets/icons/moon.svg" alt="Dark mode" class="theme-icon theme-icon-moon">
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <main class="content">
+            <section class="section">
+                <h2>Browse by tag</h2>
+
+                <div class="tags-controls">
+                    <input
+                        type="search"
+                        id="search-input"
+                        class="tag-search-input"
+                        placeholder="Search posts by title or content…"
+                        aria-label="Search posts"
+                    >
+                    <div class="tag-cloud" id="tag-cloud"></div>
+                </div>
+
+                <div id="active-filter" class="active-filter" hidden>
+                    Filtering by tag:
+                    <span id="active-tag-label" class="active-tag-label"></span>
+                    <button id="clear-filter" class="clear-filter" aria-label="Clear tag filter">✕</button>
+                </div>
+
+                <div class="blog-list" id="post-list"></div>
+
+                <p id="no-results" class="no-results" hidden>No posts match your search.</p>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // ── Blog post registry ──────────────────────────────────────────────
+        // Add an entry here whenever you publish a new post.
+        const POSTS = [
+            {
+                title: "Example Blog Post",
+                url: "example.html",
+                date: "May 2, 2026",
+                tags: ["example", "blog"],
+                excerpt: "This is an example blog post. It serves as a template for future posts and demonstrates the structure and formatting that can be used in our blogging platform.",
+            },
+            {
+                title: "Example Blog Post (ex2)",
+                url: "ex2.html",
+                date: "May 2, 2026",
+                tags: ["blog"],
+                excerpt: "This is only for testing purposes. It serves as a template for future posts and demonstrates the structure and formatting that can be used in our blogging platform.",
+            },
+        ];
+
+        // ── Theme toggle ───────────────────────────────────────────────────
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        html.setAttribute('data-theme', localStorage.getItem('theme') || 'light');
+        themeToggle.addEventListener('click', () => {
+            const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        });
+
+        // ── State ──────────────────────────────────────────────────────────
+        const params = new URLSearchParams(location.search);
+        let activeTag = params.get('tag') || null;
+        let searchQuery = '';
+
+        // ── DOM refs ───────────────────────────────────────────────────────
+        const tagCloud      = document.getElementById('tag-cloud');
+        const postList      = document.getElementById('post-list');
+        const noResults     = document.getElementById('no-results');
+        const activeFilter  = document.getElementById('active-filter');
+        const activeLabel   = document.getElementById('active-tag-label');
+        const clearBtn      = document.getElementById('clear-filter');
+        const searchInput   = document.getElementById('search-input');
+
+        // ── Helpers ────────────────────────────────────────────────────────
+        const allTags = [...new Set(POSTS.flatMap(p => p.tags))].sort();
+
+        function setTag(tag) {
+            activeTag = tag;
+            const url = new URL(location.href);
+            if (tag) url.searchParams.set('tag', tag);
+            else url.searchParams.delete('tag');
+            history.replaceState(null, '', url);
+            render();
+        }
+
+        function buildTagEl(tag) {
+            const btn = document.createElement('button');
+            btn.className = 'tag-filter-btn' + (tag === activeTag ? ' active' : '');
+            btn.textContent = tag;
+            btn.addEventListener('click', () => setTag(btn.classList.contains('active') ? null : tag));
+            return btn;
+        }
+
+        function buildPostEl(post) {
+            const article = document.createElement('article');
+            article.className = 'blog-entry';
+            article.innerHTML = `
+                <h3><a href="${post.url}">${post.title}</a></h3>
+                <div class="blog-meta">
+                    <span class="blog-date">${post.date}</span>
+                    <span class="blog-tags">${
+                        post.tags.map(t =>
+                            `<a href="tags.html?tag=${encodeURIComponent(t)}" class="blog-tag">${t}</a>`
+                        ).join('')
+                    }</span>
+                </div>
+                <p class="blog-excerpt">${post.excerpt}</p>
+                <a href="${post.url}" class="read-more">Read more →</a>
+            `;
+            return article;
+        }
+
+        function render() {
+            const q = searchQuery.trim().toLowerCase();
+
+            // Tag cloud
+            tagCloud.innerHTML = '';
+            allTags.forEach(t => tagCloud.appendChild(buildTagEl(t)));
+
+            // Active filter badge
+            if (activeTag) {
+                activeFilter.hidden = false;
+                activeLabel.textContent = activeTag;
+            } else {
+                activeFilter.hidden = true;
+            }
+
+            // Filter posts
+            const visible = POSTS.filter(post => {
+                const tagMatch  = !activeTag || post.tags.includes(activeTag);
+                const textMatch = !q ||
+                    post.title.toLowerCase().includes(q) ||
+                    post.excerpt.toLowerCase().includes(q) ||
+                    post.tags.some(t => t.toLowerCase().includes(q));
+                return tagMatch && textMatch;
+            });
+
+            postList.innerHTML = '';
+            visible.forEach(p => postList.appendChild(buildPostEl(p)));
+            noResults.hidden = visible.length > 0;
+        }
+
+        // ── Event listeners ────────────────────────────────────────────────
+        clearBtn.addEventListener('click', () => setTag(null));
+
+        searchInput.addEventListener('input', () => {
+            searchQuery = searchInput.value;
+            render();
+        });
+
+        // ── Initial render ─────────────────────────────────────────────────
+        render();
+    </script>
+</body>
+</html>
