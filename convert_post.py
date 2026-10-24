@@ -111,79 +111,9 @@ def format_date(val) -> str:
 
 # ── HTML generation ────────────────────────────────────────────────────────────
 
-_NAV = """\
-        <nav class="sidebar">
-            <div class="nav-content">
-                <ul class="nav-list">
-                    <li><a href="../index.html#about" class="nav-link">About</a></li>
-                    <li><a href="../index.html#publications" class="nav-link">Publications</a></li>
-                    <li><a href="../blog.html" class="nav-link">Blog</a></li>
-                    <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
-                </ul>
-                <div class="nav-right">
-                    <div class="social-icons">
-                        <a href="https://scholar.google.com/citations?user=gKqjcwEAAAAJ" class="social-link" title="Google Scholar">
-                            <img src="../assets/icons/gsch.svg" alt="Google Scholar">
-                        </a>
-                        <a href="https://github.com/mmmaurer" class="social-link" title="GitHub">
-                            <img src="../assets/icons/github.svg" alt="GitHub">
-                        </a>
-                        <a href="https://bsky.app/profile/mmmaurer.bsky.social" class="social-link" title="Bluesky">
-                            <img src="../assets/icons/bsky.svg" alt="Bluesky">
-                        </a>
-                        <a href="https://www.linkedin.com/in/maximilian-martin-maurer-217591268/" class="social-link" title="LinkedIn">
-                            <img src="../assets/icons/linkedin.svg" alt="LinkedIn">
-                        </a>
-                    </div>
-                    <button id="theme-toggle" class="theme-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">
-                        <span class="toggle-circle">
-                            <img src="../assets/icons/sun.svg" alt="Light mode" class="theme-icon theme-icon-sun">
-                            <img src="../assets/icons/moon.svg" alt="Dark mode" class="theme-icon theme-icon-moon">
-                        </span>
-                    </button>
-                </div>
-            </div>
-        </nav>"""
-
-_SCRIPTS = """\
-    <script>
-        // Theme toggle
-        const themeToggle = document.getElementById('theme-toggle');
-        const html = document.documentElement;
-        html.setAttribute('data-theme', localStorage.getItem('theme') || 'light');
-        themeToggle.addEventListener('click', () => {
-            const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-            html.setAttribute('data-theme', next);
-            localStorage.setItem('theme', next);
-        });
-
-        // Lightbox
-        const lightbox    = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-
-        document.querySelectorAll('.blog-img-wrap').forEach(wrap => {
-            wrap.addEventListener('click', () => {
-                const img = wrap.querySelector('img');
-                lightboxImg.src = img.src;
-                lightboxImg.alt = img.alt;
-                lightbox.classList.add('open');
-                document.body.style.overflow = 'hidden';
-            });
-        });
-
-        lightbox.addEventListener('click', () => {
-            lightbox.classList.remove('open');
-            document.body.style.overflow = '';
-        });
-
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') {
-                lightbox.classList.remove('open');
-                document.body.style.overflow = '';
-            }
-        });
-    </script>"""
-
+# Nav markup and the theme/lightbox scripts are now shared via ../site.js:
+#   - <nav class="sidebar" id="site-nav"></nav>  (rendered by site.js)
+#   - <script src="../site.js" defer></script>   (theme, bibtex, news, lightbox)
 
 def render_post_page(title: str, date_str: str, tags: list[str], content_html: str) -> str:
     tag_links = "\n                            ".join(
@@ -203,7 +133,7 @@ def render_post_page(title: str, date_str: str, tags: list[str], content_html: s
 </head>
 <body>
     <div class="container">
-{_NAV}
+        <nav class="sidebar" id="site-nav"></nav>
 
         <main class="content">
             <article class="section blog-post">
@@ -230,7 +160,7 @@ def render_post_page(title: str, date_str: str, tags: list[str], content_html: s
             <img id="lightbox-img" src="" alt="">
         </div>
     </div>
-{_SCRIPTS}
+    <script src="../site.js" defer></script>
 </body>
 </html>
 """
