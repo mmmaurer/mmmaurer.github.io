@@ -10,42 +10,7 @@
 <body>
     <div class="container">
         <!-- Side Navigation -->
-        <nav class="sidebar">
-            <div class="nav-content">
-                <ul class="nav-list">
-                    <li><a href="index.html#about" class="nav-link">About</a></li>
-                    <li><a href="index.html#news" class="nav-link">News</a></li>
-                    <li><a href="index.html#publications" class="nav-link">Publications</a></li>
-                    <li><a href="blog.html" class="nav-link">Blog</a></li>
-                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-                </ul>
-                <div class="nav-right">
-                    <div class="social-icons">
-                        <a href="https://scholar.google.com/citations?user=gKqjcwEAAAAJ" class="social-link" title="Google Scholar">
-                            <img src="assets/icons/gsch.svg" alt="Google Scholar">
-                        </a>
-                        <a href="https://github.com/mmmaurer" class="social-link" title="GitHub">
-                            <img src="assets/icons/github.svg" alt="GitHub">
-                        </a>
-                        <a href="https://codeberg.org/mmmaurer" class="social-link" title="Codeberg">
-                            <img src="assets/icons/codeberg.svg" alt="Codeberg">
-                        </a>
-                        <a href="https://bsky.app/profile/mmmaurer.bsky.social" class="social-link" title="Bluesky">
-                            <img src="assets/icons/bsky.svg" alt="Bluesky">
-                        </a>
-                        <a href="https://www.linkedin.com/in/maximilian-martin-maurer-217591268/" class="social-link" title="LinkedIn">
-                            <img src="assets/icons/linkedin.svg" alt="LinkedIn">
-                        </a>
-                    </div>
-                    <button id="theme-toggle" class="theme-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">
-                        <span class="toggle-circle">
-                            <img src="assets/icons/sun.svg" alt="Light mode" class="theme-icon theme-icon-sun">
-                            <img src="assets/icons/moon.svg" alt="Dark mode" class="theme-icon theme-icon-moon">
-                        </span>
-                    </button>
-                </div>
-            </div>
-        </nav>
+        <nav class="sidebar" id="site-nav"></nav>
 
         <!-- Main Content -->
         <main class="content">
@@ -77,6 +42,14 @@
                 <h2>News</h2>
                 <div class="news-list" id="news-list">
                     <article class="news-item">
+                        <p class="news-date"><strong>2026-10-20</strong></p>
+                        <p>I will present our work on "Promptology: A Large-Scale Systematic Analysis of Prompt Elements and Contextual Factors in Argument Generation" at EMNLP 2026 in Budapest!</p>
+                        <div class="pub-buttons">
+                            <a class="btn" href="assets/pdf/posters/promptology_poster.pdf" target="_blank" rel="noopener">Poster</a>
+                            <a class="btn" href="https://aclanthology.org/2025.emnlp-main.1755/" target="_blank" rel="noopener">Paper</a>
+                        </div>
+                    </article>
+                    <article class="news-item">
                         <p class="news-date"><strong>2026-06-06</strong></p>
                         <p>I gave an invited talk in Bamberg in the research seminar of the Fundamentals of Natural Language Processing group. </p>
                         <div class="pub-buttons">
@@ -98,6 +71,39 @@
                     </a>
                 </div>
                 <div class="publication-list">
+                    <article class="publication">
+                        <h3><a href="https://aclanthology.org/2026.emnlp-main.428/">Promptology: A Large-Scale Systematic Analysis of Prompt Elements and Contextual Factors in Argument Generation</a></h3>
+                        <p class="publication-meta"><strong>Maurer</strong>, Lisboa Cotovio, Melis, Romberg, Costa, and Lapesa. EMNLP 2026, Budapest, Hungary.</p>
+                        <div class="pub-buttons">
+                            <a class="btn" href="https://aclanthology.org/2026.emnlp-main.428/" target="_blank" rel="noopener">Paper</a>
+                            <button class="btn bib-btn" data-bib-id="bib-maurer-2026-promptology">BibTeX</button>
+                            <a class="btn" href="https://github.com/mmmaurer/promptology" target="_blank" rel="noopener">Code</a>
+                            <a class="btn" href="assets/pdf/posters/promptology_poster.pdf" target="_blank" rel="noopener">Poster</a>
+                        </div>
+                        <pre class="bibtex" id="bib-maurer-2026-promptology" style="display:none">@inproceedings{maurer-etal-2026-promptology,
+    title = "Promptology: A Large-Scale Systematic Analysis of Prompt Elements and Contextual Factors in Argument Generation",
+    author = "Maurer, Maximilian  and
+      Cotovio, Ana Lisboa  and
+      Melis, Matteo  and
+      Romberg, Julia  and
+      Costa, Aldo  and
+      Lapesa, Gabriella",
+    editor = "Lee, Hung-Yi  and
+      Dev, Sunipa  and
+      Li, Jessy  and
+      Elliott, Desmond",
+    booktitle = "Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing",
+    month = oct,
+    year = "2026",
+    address = "Budapest, Hungary",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2026.emnlp-main.428/",
+    pages = "9794--9826",
+    ISBN = "979-8-89176-459-0",
+    abstract = "The ``political opinions'' of Large Language Models (LLMs) increasingly find their way into political discourse despite limited under- standing and control of these systems. Our paper adds to the understanding of how prompt manipulation impacts the multilingual generation of political arguments, focusing on two fundamental aspects of generated text: style and semantics. Starting from a reference set of Swiss politicians' arguments in German, Italian, and French, we conduct a large-scale prompt-manipulation experiment on 4 LLMs, building the prompts in a modular way (i.e., with blocks encoding socio-demographics, context, and examples) and testing all possible combinations. Using our parallel dataset of over 375k human argument-aligned generated arguments, we assess the detectability of LLM arguments through classification experiments with 160 linguistic features and semantic embeddings. We then carry out quantitative and qualitative analysis to understand how human- written vs. LLM-generated text compares, and to assess the impact of prompt manipulation.\par Our results show that human and LLM arguments are substantially different in style and semantics, making their identification easy for classifiers. Prompt manipulation does not substantially impact semantics and style, except for sociodemographic persona prompting, which makes generated texts moderately more human-like. Model, language, and topics impact the stability of the generated text most. We make the code, data, and raw results available via https://github.com/mmmaurer/promptology."
+}
+</pre>
+                    </article>
                     <article class="publication">
                         <h3><a href="https://aclanthology.org/2026.eacl-demo.5/">elfen: A Python Package for Efficient Linguistic Feature Extraction for Natural Language Datasets</a></h3>
                         <p class="publication-meta"><strong>Maurer</strong>. EACL 2026 (System Demonstrations), Rabat, Morocco.</p>
@@ -269,72 +275,6 @@
             </section>
         </main>
     </div>
-    <script>
-        const themeToggle = document.getElementById('theme-toggle');
-        const html = document.documentElement;
-
-        // Check for saved theme preference or default to light mode
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        html.setAttribute('data-theme', currentTheme);
-
-        themeToggle.addEventListener('click', () => {
-            const theme = html.getAttribute('data-theme');
-            const newTheme = theme === 'light' ? 'dark' : 'light';
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        });
-
-        // BibTeX copy buttons
-        document.addEventListener('click', async (e) => {
-            const btn = e.target.closest('.bib-btn');
-            if (!btn) return;
-            const bibId = btn.getAttribute('data-bib-id');
-            if (!bibId) return;
-            const pre = document.getElementById(bibId);
-            if (!pre) return;
-            const bibText = pre.textContent.trim();
-            try {
-                await navigator.clipboard.writeText(bibText);
-                const old = btn.textContent;
-                btn.textContent = 'Copied!';
-                btn.disabled = true;
-                setTimeout(() => {
-                    btn.textContent = old;
-                    btn.disabled = false;
-                }, 1800);
-            } catch (err) {
-                alert('Copy failed. You can manually select and copy the BibTeX.');
-            }
-        });
-
-        // News list: show only latest 3 items by default, toggle to show more
-        document.addEventListener('DOMContentLoaded', () => {
-            const newsList = document.getElementById('news-list');
-            const toggleBtn = document.getElementById('news-toggle');
-            if (!newsList || !toggleBtn) return;
-            const items = Array.from(newsList.querySelectorAll('.news-item'));
-            const maxVisible = 3;
-            if (items.length <= maxVisible) {
-                toggleBtn.style.display = 'none';
-                return;
-            }
-            const hiddenItems = items.slice(maxVisible);
-            hiddenItems.forEach(i => i.classList.add('hidden'));
-            toggleBtn.style.display = '';
-            toggleBtn.textContent = `More (${hiddenItems.length})`;
-            toggleBtn.addEventListener('click', () => {
-                const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-                if (expanded) {
-                    hiddenItems.forEach(i => i.classList.add('hidden'));
-                    toggleBtn.textContent = `More (${hiddenItems.length})`;
-                    toggleBtn.setAttribute('aria-expanded', 'false');
-                } else {
-                    hiddenItems.forEach(i => i.classList.remove('hidden'));
-                    toggleBtn.textContent = 'Less';
-                    toggleBtn.setAttribute('aria-expanded', 'true');
-                }
-            });
-        });
-    </script>
+    <script src="site.js" defer></script>
 </body>
 </html>

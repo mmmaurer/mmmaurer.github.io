@@ -708,7 +708,33 @@ html[data-theme="dark"] .toggle-circle {
     margin-top: 1rem;
 }
 
-/* News list helpers */
+/* News Section */
+.news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.news-item {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.news-item:hover {
+    box-shadow: 0 2px 8px var(--border-color);
+}
+
+.news-date {
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+    font-size: 0.9rem;
+}
+
 .news-list .news-item.hidden {
     display: none;
 }
