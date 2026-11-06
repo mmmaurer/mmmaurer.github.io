@@ -11,6 +11,7 @@ the vault's attachments folder into assets/img/blog/.
 """
 
 import argparse
+import html as html_lib
 import json
 import re
 import shutil
@@ -80,8 +81,16 @@ _ZOOM_ICON = (
 
 def wrap_images(html: str) -> str:
     """Wrap each <img> with a clickable container and a zoom-in icon overlay."""
+    def _lazy(tag: str) -> str:
+        """Ask the browser to defer off-screen images without breaking the tag."""
+        if "loading=" in tag:
+            return tag
+        if tag.endswith("/>"):
+            return tag[:-2].rstrip() + ' loading="lazy" decoding="async" />'
+        return tag[:-1].rstrip() + ' loading="lazy" decoding="async">'
+
     def _wrap(m: re.Match) -> str:
-        return f'<span class="blog-img-wrap">{m.group(0)}{_ZOOM_ICON}</span>'
+        return f'<span class="blog-img-wrap">{_lazy(m.group(0))}{_ZOOM_ICON}</span>'
     return re.sub(r"<img\b[^>]*>", _wrap, html)
 
 
@@ -114,6 +123,32 @@ def format_date(val) -> str:
 # Nav markup and the theme/lightbox scripts are now shared via ../site.js:
 #   - <nav class="sidebar" id="site-nav"></nav>  (rendered by site.js)
 #   - <script src="../site.js" defer></script>   (theme, bibtex, news, lightbox)
+#
+# The theme is applied by an inline script before first paint (no flash), and
+# the speculationrules block lets Chrome prerender pages on hover.
+
+THEME_BOOT = """    <!-- Set the theme before the first paint to avoid a light flash. -->
+    <script>
+        (() => {
+            try {
+                const stored = localStorage.getItem('theme');
+                const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.dataset.theme = stored || (dark ? 'dark' : 'light');
+            } catch (_) { /* private mode: keep the default theme */ }
+        })();
+    </script>"""
+
+SPECULATION_RULES = """    <!-- Chrome can prerender pages on hover, making navigation instant. -->
+    <script type="speculationrules">
+        {
+            "prerender": [{
+                "source": "document",
+                "where": { "selector_matches": "a[href]:not([target]):not([download])" },
+                "eagerness": "moderate"
+            }]
+        }
+    </script>"""
+
 
 def render_post_page(title: str, date_str: str, tags: list[str], content_html: str) -> str:
     tag_links = "\n                            ".join(
@@ -123,22 +158,37 @@ def render_post_page(title: str, date_str: str, tags: list[str], content_html: s
         "                    " + line if line.strip() else line
         for line in content_html.splitlines()
     )
+    safe_title = html_lib.escape(title)
+    description = html_lib.escape(f"Blog post: {title}")
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{title} - Maximilian Maurer's Website</title>
+
+{THEME_BOOT}
+
+    <title>{safe_title} — Maximilian Maurer</title>
+    <meta name="description" content="{description}">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#fbfbfc">
+
+    <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="../assets/icons/favicon-32.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
     <link rel="stylesheet" href="../styles.css">
+
+{SPECULATION_RULES}
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <div class="container">
         <nav class="sidebar" id="site-nav"></nav>
 
-        <main class="content">
+        <main class="content" id="main" tabindex="-1">
             <article class="section blog-post">
                 <div class="blog-post-header">
-                    <h1>{title}</h1>
+                    <h1>{safe_title}</h1>
                     <div class="blog-post-meta">
                         <span class="blog-date">{date_str}</span>
                         <div class="blog-tags">
@@ -156,7 +206,7 @@ def render_post_page(title: str, date_str: str, tags: list[str], content_html: s
                 </div>
             </article>
         </main>
-        <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+        <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" tabindex="-1">
             <img id="lightbox-img" src="" alt="">
         </div>
     </div>
@@ -174,17 +224,19 @@ def update_blog_html(title: str, date_str: str, tags: list[str], excerpt: str, f
     tag_links = "\n                                ".join(
         f'<a href="blog/tags.html?tag={t}" class="blog-tag">{t}</a>' for t in tags
     )
+    safe_title = html_lib.escape(title)
+    safe_excerpt = html_lib.escape(excerpt)
     new_entry = (
         f'                    <article class="blog-entry">\n'
-        f'                        <h3><a href="blog/{filename}">{title}</a></h3>\n'
+        f'                        <h3><a href="blog/{filename}">{safe_title}</a></h3>\n'
         f'                        <div class="blog-meta">\n'
         f'                            <span class="blog-date">{date_str}</span>\n'
         f'                            <span class="blog-tags">\n'
         f'                                {tag_links}\n'
         f'                            </span>\n'
         f'                        </div>\n'
-        f'                        <p class="blog-excerpt">{excerpt}</p>\n'
-        f'                        <a href="blog/{filename}" class="read-more">Read more →</a>\n'
+        f'                        <p class="blog-excerpt">{safe_excerpt}</p>\n'
+        f'                        <a href="blog/{filename}" class="read-more">Read more</a>\n'
         f'                    </article>'
     )
     marker = '<div class="blog-list">'

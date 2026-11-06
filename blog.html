@@ -3,19 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Maximilian Maurer's Website</title>
+
+    <!-- Set the theme before the first paint to avoid a light flash. -->
+    <script>
+        (() => {
+            try {
+                const stored = localStorage.getItem('theme');
+                const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.dataset.theme = stored || (dark ? 'dark' : 'light');
+            } catch (_) { /* private mode: keep the default theme */ }
+        })();
+    </script>
+
+    <title>Blog — Maximilian Maurer</title>
+    <meta name="description" content="Notes on research, methods, and tools by Maximilian Maurer.">
+    <meta name="author" content="Maximilian Maurer">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#fbfbfc">
+
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="assets/icons/favicon-32.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Chrome can prerender pages on hover, making navigation instant. -->
+    <script type="speculationrules">
+        {
+            "prerender": [{
+                "source": "document",
+                "where": { "selector_matches": "a[href]:not([target]):not([download])" },
+                "eagerness": "moderate"
+            }]
+        }
+    </script>
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <div class="container">
         <!-- Side Navigation -->
         <nav class="sidebar" id="site-nav"></nav>
 
         <!-- Main Content -->
-        <main class="content">
+        <main class="content" id="main" tabindex="-1">
+            <header class="page-header">
+                <h1>Blog</h1>
+                <p>Occasional notes on research, methods, and the tools I build along the way.</p>
+            </header>
+
             <!-- Blog Section -->
-            <section id="blog" class="section">
-                <h2>Blog</h2>
+            <section class="section">
                 <div class="blog-list">
                     <article class="blog-entry">
                         <h3><a href="blog/ex2.html">Example Blog Post (ex2)</a></h3>
@@ -26,7 +62,7 @@
                             </span>
                         </div>
                         <p class="blog-excerpt">This is only for testing purposes. It serves as a template for future posts and demonstrates the structure and formatting that can be used in our blogging platform.</p>
-                        <a href="blog/ex2.html" class="read-more">Read more →</a>
+                        <a href="blog/ex2.html" class="read-more">Read more</a>
                     </article>
                 </div>
             </section>

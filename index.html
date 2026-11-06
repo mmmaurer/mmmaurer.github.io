@@ -3,24 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maximilian Maurer's Website</title>
+
+    <!-- Set the theme before the first paint to avoid a light flash. -->
+    <script>
+        (() => {
+            try {
+                const stored = localStorage.getItem('theme');
+                const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.dataset.theme = stored || (dark ? 'dark' : 'light');
+            } catch (_) { /* private mode: keep the default theme */ }
+        })();
+    </script>
+
+    <title>Maximilian Maurer — Computational Social Science</title>
+    <meta name="description" content="Maximilian Maurer is a PhD researcher at GESIS and Heinrich Heine University Düsseldorf working on argument mining, linguistic features, and LLM-generated text.">
+    <meta name="author" content="Maximilian Maurer">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#fbfbfc">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Maximilian Maurer — Computational Social Science">
+    <meta property="og:description" content="Research on argumentation, linguistic features, and LLM-generated text.">
+
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="assets/icons/favicon-32.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="assets/icons/convo.png" type="image/png">
+
+    <!-- Chrome can prerender pages on hover, making navigation instant. -->
+    <script type="speculationrules">
+        {
+            "prerender": [{
+                "source": "document",
+                "where": { "selector_matches": "a[href]:not([target]):not([download])" },
+                "eagerness": "moderate"
+            }]
+        }
+    </script>
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <div class="container">
         <!-- Side Navigation -->
         <nav class="sidebar" id="site-nav"></nav>
 
         <!-- Main Content -->
-        <main class="content">
+        <main class="content" id="main" tabindex="-1">
+            <!-- Intro -->
+            <header class="hero">
+                <p class="hero-eyebrow">Computational Social Science · GESIS &amp; HHU Düsseldorf</p>
+                <h1>Maximilian Maurer</h1>
+                <p class="hero-lede">I'm a PhD researcher interested in who differs in their perception and production of language and what in the linguistic material makes them differ.</p>
+                <div class="hero-actions">
+                    <a class="btn btn--primary" href="mailto:maximilian.maurer@gesis.org">Get in touch</a>
+                    <a class="btn" href="https://scholar.google.com/citations?user=gKqjcwEAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+                    <a class="btn" href="https://github.com/mmmaurer" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
+            </header>
+
             <!-- About Section -->
             <section id="about" class="section">
                 <h2>About</h2>
                 <div class="about-content">
                     <picture>
                         <source srcset="assets/img/img1.webp" type="image/webp">
-                        <img src="assets/img/img1.jpg" alt="Profile picture" class="profile-pic" width="400" height="341">
+                        <img src="assets/img/img1.jpg" alt="Portrait of Maximilian Maurer" class="profile-pic" width="400" height="341" decoding="async" fetchpriority="high">
                     </picture>
                     <div class="about-text">
                         <p>I'm a third year PhD student in the Data Science Methods team in the <a href="https://www.gesis.org/en/institute/about-us/departments/computational-social-science">Computational Social Science department</a> at GESIS - Leibniz Institute for the Social Sciences in Cologne, Germany, and at Heinrich Heine University Düsseldorf.</p>
@@ -28,7 +75,7 @@
                         <p>On the one hand, my research interests include linguistic and annotator factors of (dis)agreement in text annotation and downstream effects on model behavior, in particular for subjective phenomena.
                         In this context, with colleagues, we investigated the role of linguistic features in personalized argument retrieval (see <a href="https://aclanthology.org/2024.argmining-1.18/">Maurer et al., 2024</a>), and discussed the effects of group-level annotation behavior on group transfer performance ceilings for argument quality prediction (see the pilot study in <a href="https://aclanthology.org/2025.naacl-long.382/">Romberg et al., 2025</a>).</p>
 
-                        <p>On the other hand, (somewhat by accident) became interested in questions related to synthetic text generated by large language models (LLMs). Work on this includes linguistic makeup and detectability of such texts (see <a href="https://aclanthology.org/2025.emnlp-main.1755/">Dönmez, Maurer et al., 2025</a>, where we analyzed linguistic features in human-written and LLM-generated counterarguments). We also discussed questions and pitfalls of representation and representativeness of LLM-generated texts for simulating people's opinions (see <a href="https://synthetic-data-workshop.github.io/papers/04.pdf">Lassen, Maurer and Melis, 2025</a>).</p>
+                        <p>On the other hand, I (somewhat by accident) became interested in questions related to synthetic text generated by large language models (LLMs). Work on this includes linguistic makeup and detectability of such texts (see <a href="https://aclanthology.org/2025.emnlp-main.1755/">Dönmez, Maurer et al., 2025</a>, where we analyzed linguistic features in human-written and LLM-generated counterarguments). We also discussed questions and pitfalls of representation and representativeness of LLM-generated texts for simulating people's opinions (see <a href="https://synthetic-data-workshop.github.io/papers/04.pdf">Lassen, Maurer and Melis, 2025</a>).</p>
 
                         <p>To facilitate large-scale analyses using interpretable linguistic features, I developed a package called <a href="https://github.com/mmmaurer/elfen">elfen</a> (the German word for Santas little helpers 🧝) to extract them efficiently for large text datasets. For more information, check out the <a href="https://github.com/mmmaurer/elfen">GitHub repository</a> and the <a href="https://elfen.readthedocs.io/en/latest/">documentation</a>.</p>
 
@@ -46,7 +93,7 @@
                         <p>I will present our work on "Promptology: A Large-Scale Systematic Analysis of Prompt Elements and Contextual Factors in Argument Generation" at EMNLP 2026 in Budapest!</p>
                         <div class="pub-buttons">
                             <a class="btn" href="assets/pdf/posters/promptology_poster.pdf" target="_blank" rel="noopener">Poster</a>
-                            <a class="btn" href="https://aclanthology.org/2025.emnlp-main.1755/" target="_blank" rel="noopener">Paper</a>
+                            <a class="btn" href="https://aclanthology.org/2026.emnlp-main.428/" target="_blank" rel="noopener">Paper</a>
                         </div>
                     </article>
                     <article class="news-item">
@@ -58,7 +105,7 @@
                     </article>
                 </div>
                 <div>
-                    <button id="news-toggle" class="btn news-more-btn" aria-expanded="false" style="display:none">More</button>
+                    <button id="news-toggle" class="btn news-more-btn" aria-expanded="false" aria-controls="news-list" style="display:none">More</button>
                 </div>
             </section>
 
@@ -67,18 +114,50 @@
                 <h2>Publications</h2>
                 <div class="publications-cta" style="margin-bottom:0.75rem;">
                     <a class="btn" href="https://scholar.google.com/citations?user=gKqjcwEAAAAJ" target="_blank" rel="noopener noreferrer">
-                        <img src="assets/icons/gsch.svg" alt="Google Scholar" style="width:18px;height:18px;vertical-align:middle;margin-right:8px;">See my full list of publications on Google Scholar
+                        <img class="btn-icon" src="assets/icons/gsch.svg" alt="" width="18" height="18">See my full list of publications on Google Scholar
                     </a>
                 </div>
                 <div class="publication-list">
+                                        <article class="publication">
+                        <h3><a href="https://aclanthology.org/2026.findings-aacl.10/">A Systematic Analysis of Linguistic Features in AI-Generated English Text Detection Across Domains and Models</a></h3>
+                        <p class="publication-meta">El Attar, Dönmez, <strong>Maurer</strong>, and Falenska. Findings of IJCNLP-AACL 2026, Hengqin, China.</p>
+                        <div class="pub-buttons">
+                            <a class="btn" href="https://aclanthology.org/2026.findings-aacl.10/" target="_blank" rel="noopener">Paper</a>
+                            <button class="btn bib-btn" data-bib-id="bib-elattar-etal-2026-systematic">BibTeX</button>
+                        </div>
+                        <pre class="bibtex" id="bib-elattar-etal-2026-systematic" style="display:none">@inproceedings{el-attar-etal-2026-systematic,
+    title = "A Systematic Analysis of Linguistic Features in {AI}-Generated {E}nglish Text Detection Across Domains and Models",
+    author = {El Attar, Yassir  and
+      D{\"o}nmez, Esra  and
+      Maurer, Maximilian  and
+      Falenska, Agnieszka},
+    editor = "Zhang, Yue  and
+      Xu, Ruifeng  and
+      Purwarianti, Ayu  and
+      Rong, Tong  and
+      Suzuki, Jun",
+    booktitle = "Findings of the {A}ssociation for {C}omputational {L}inguistics: {IJCNLP}-{AACL} 2026",
+    month = nov,
+    year = "2026",
+    address = "Hengqin, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2026.findings-aacl.10/",
+    pages = "181--208",
+    ISBN = "979-8-89176-444-6",
+    abstract = "Interpretable linguistic features offer a promising approach for explaining *why* a given text appears machine-generated, particularly for non-expert users. However, existing findings on which features reliably indicate LLM-generated text remain fragmented across feature sets, models, and text domains. To address this gap, we conduct a large-scale empirical study assessing the robustness of linguistic signals for characterizing AI-generated text. Our analysis covers 284 interpretable linguistic features across outputs from 30 LLMs and 10 text domains under cross-model and cross-domain generalization settings. We show that classifiers based solely on linguistic features can reliably distinguish AI-generated from human-written text. However, many previously proposed indicators prove strongly context-dependent, with the exception of measures of lexical richness, which remain robust signals across model families and text domains. These results demonstrate which linguistic signals generalize across contexts and provide a foundation for more reliable, interpretable analyses of AI-generated language."
+}
+</pre>
+                    </article>
                     <article class="publication">
                         <h3><a href="https://aclanthology.org/2026.emnlp-main.428/">Promptology: A Large-Scale Systematic Analysis of Prompt Elements and Contextual Factors in Argument Generation</a></h3>
                         <p class="publication-meta"><strong>Maurer</strong>, Lisboa Cotovio, Melis, Romberg, Costa, and Lapesa. EMNLP 2026, Budapest, Hungary.</p>
                         <div class="pub-buttons">
                             <a class="btn" href="https://aclanthology.org/2026.emnlp-main.428/" target="_blank" rel="noopener">Paper</a>
                             <button class="btn bib-btn" data-bib-id="bib-maurer-2026-promptology">BibTeX</button>
-                            <a class="btn" href="https://github.com/mmmaurer/promptology" target="_blank" rel="noopener">Code</a>
                             <a class="btn" href="assets/pdf/posters/promptology_poster.pdf" target="_blank" rel="noopener">Poster</a>
+                            <a class="btn" href="https://github.com/mmmaurer/promptology" target="_blank" rel="noopener">Code</a>
+                            <a class="btn" href="https://huggingface.co/datasets/mmmaurer/promptology" target="_blank" rel="noopener">Data</a>
+                            <a class="btn" href="https://huggingface.co/datasets/mmmaurer/promptology-results" target="_blank" rel="noopener">Raw results</a>
                         </div>
                         <pre class="bibtex" id="bib-maurer-2026-promptology" style="display:none">@inproceedings{maurer-etal-2026-promptology,
     title = "Promptology: A Large-Scale Systematic Analysis of Prompt Elements and Contextual Factors in Argument Generation",
@@ -110,8 +189,11 @@
                         <div class="pub-buttons">
                             <a class="btn" href="https://aclanthology.org/2026.eacl-demo.5/" target="_blank" rel="noopener">Paper</a>
                             <button class="btn bib-btn" data-bib-id="bib-maurer-2026-elfen">BibTeX</button>
-                            <a class="btn" href="https://github.com/mmmaurer/elfen" target="_blank" rel="noopener">Code</a>
                             <a class="btn" href="assets/pdf/posters/elfen_poster.pdf" target="_blank" rel="noopener">Poster</a>
+                            <a class="btn" href="https://github.com/mmmaurer/elfen" target="_blank" rel="noopener">Code</a>
+                            <a class="btn" href="https://elfen.readthedocs.io/en/latest/" target="_blank" rel="noopener">Documentation</a>
+                            <a class="btn" href="https://pypi.org/project/elfen/" target="_blank" rel="noopener">PyPI</a>
+                            <a class="btn" href="https://github.com/mmmaurer/elfen-examples" target="_blank" rel="noopener">Example showcases</a>
                         </div>
                         <pre class="bibtex" id="bib-maurer-2026-elfen" style="display:none">@inproceedings{maurer-2026-elfen,
     title = "{elfen: A Python Package for Efficient Linguistic Feature Extraction for Natural Language Datasets}",
@@ -138,6 +220,7 @@
                             <a class="btn" href="https://aclanthology.org/2025.emnlp-main.1755/" target="_blank" rel="noopener">Paper</a>
                             <button class="btn bib-btn" data-bib-id="bib-donmez-etal-2025-ai">BibTeX</button>
                             <a class="btn" href="https://github.com/esradonmez/ai-argues-differently" target="_blank" rel="noopener">Code</a>
+                            <a class="btn" href="https://huggingface.co/collections/mmmaurer/ai-argues-differently-datasets" target="_blank" rel="noopener">Data</a>
                             <a class="btn" href="assets/pdf/posters/ai_argues_differently.pdf" target="_blank" rel="noopener">Poster</a>
                             <a class="btn" href="assets/pdf/slides/ai-argues-differently.pdf" target="_blank" rel="noopener">Slides</a>
                         </div>
@@ -169,7 +252,7 @@
                         <div class="pub-buttons">
                             <a class="btn" href="https://aclanthology.org/2025.naacl-long.382/" target="_blank" rel="noopener">Paper</a>
                             <button class="btn bib-btn" data-bib-id="bib-romberg-etal-2025-towards">BibTeX</button>
-                            <a class="btn" href="https://github.com/juliaromberg/perspectivist-turn-aq" target="_blank" rel="noopener">Code</a>
+                            <a class="btn" href="https://github.com/juliaromberg/perspectivist-turn-aq" target="_blank" rel="noopener">Code & Data</a>
                         </div>
                         <pre class="bibtex" id="bib-romberg-etal-2025-towards" style="display:none">@inproceedings{romberg-etal-2025-towards,
     title = "Towards a Perspectivist Turn in Argument Quality Assessment",

@@ -3,16 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Example Blog Post (ex2) - Maximilian Maurer's Website</title>
+
+    <!-- Set the theme before the first paint to avoid a light flash. -->
+    <script>
+        (() => {
+            try {
+                const stored = localStorage.getItem('theme');
+                const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.dataset.theme = stored || (dark ? 'dark' : 'light');
+            } catch (_) { /* private mode: keep the default theme */ }
+        })();
+    </script>
+
+    <title>Example Blog Post (ex2) — Maximilian Maurer</title>
+    <meta name="description" content="Example blog post.">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#fbfbfc">
+
+    <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="../assets/icons/favicon-32.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
     <link rel="stylesheet" href="../styles.css">
+
+    <!-- Chrome can prerender pages on hover, making navigation instant. -->
+    <script type="speculationrules">
+        {
+            "prerender": [{
+                "source": "document",
+                "where": { "selector_matches": "a[href]:not([target]):not([download])" },
+                "eagerness": "moderate"
+            }]
+        }
+    </script>
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <div class="container">
         <!-- Side Navigation -->
         <nav class="sidebar" id="site-nav"></nav>
 
         <!-- Main Content -->
-        <main class="content">
+        <main class="content" id="main" tabindex="-1">
             <!-- Blog Post Section -->
             <article class="section blog-post">
                 <div class="blog-post-header">
@@ -34,6 +65,10 @@
                 </div>
             </article>
         </main>
+
+        <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" tabindex="-1">
+            <img id="lightbox-img" src="" alt="">
+        </div>
     </div>
     <script src="../site.js" defer></script>
 </body>

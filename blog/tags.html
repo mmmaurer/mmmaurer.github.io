@@ -3,16 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tags - Maximilian Maurer's Website</title>
+
+    <!-- Set the theme before the first paint to avoid a light flash. -->
+    <script>
+        (() => {
+            try {
+                const stored = localStorage.getItem('theme');
+                const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.dataset.theme = stored || (dark ? 'dark' : 'light');
+            } catch (_) { /* private mode: keep the default theme */ }
+        })();
+    </script>
+
+    <title>Tags — Maximilian Maurer</title>
+    <meta name="description" content="Browse blog posts by tag.">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#fbfbfc">
+
+    <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="../assets/icons/favicon-32.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
     <link rel="stylesheet" href="../styles.css">
+
+    <!-- Chrome can prerender pages on hover, making navigation instant. -->
+    <script type="speculationrules">
+        {
+            "prerender": [{
+                "source": "document",
+                "where": { "selector_matches": "a[href]:not([target]):not([download])" },
+                "eagerness": "moderate"
+            }]
+        }
+    </script>
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <div class="container">
         <nav class="sidebar" id="site-nav"></nav>
 
-        <main class="content">
+        <main class="content" id="main" tabindex="-1">
+            <header class="page-header">
+                <h1>Browse by tag</h1>
+            </header>
+
             <section class="section">
-                <h2>Browse by tag</h2>
 
                 <div class="tags-controls">
                     <input
@@ -67,6 +101,7 @@
 
         // ── Helpers ────────────────────────────────────────────────────────
         const allTags = [...new Set(POSTS.flatMap(p => p.tags))].sort();
+        let tagButtons = [];
 
         function setTag(tag) {
             activeTag = tag;
@@ -74,15 +109,35 @@
             if (tag) url.searchParams.set('tag', tag);
             else url.searchParams.delete('tag');
             history.replaceState(null, '', url);
-            render();
+            syncTags();
+            updateActiveFilter();
+            renderPosts();
         }
 
-        function buildTagEl(tag) {
-            const btn = document.createElement('button');
-            btn.className = 'tag-filter-btn' + (tag === activeTag ? ' active' : '');
-            btn.textContent = tag;
-            btn.addEventListener('click', () => setTag(btn.classList.contains('active') ? null : tag));
-            return btn;
+        function renderTags() {
+            tagButtons = allTags.map(tag => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'tag-filter-btn';
+                btn.textContent = tag;
+                btn.addEventListener('click', () => setTag(tag === activeTag ? null : tag));
+                return btn;
+            });
+            tagCloud.replaceChildren(...tagButtons);
+            syncTags();
+        }
+
+        function syncTags() {
+            tagButtons.forEach((btn, i) => {
+                const active = allTags[i] === activeTag;
+                btn.classList.toggle('active', active);
+                btn.setAttribute('aria-pressed', String(active));
+            });
+        }
+
+        function updateActiveFilter() {
+            activeFilter.hidden = !activeTag;
+            activeLabel.textContent = activeTag || '';
         }
 
         function buildPostEl(post) {
@@ -99,27 +154,14 @@
                     }</span>
                 </div>
                 <p class="blog-excerpt">${post.excerpt}</p>
-                <a href="${post.url}" class="read-more">Read more →</a>
+                <a href="${post.url}" class="read-more">Read more</a>
             `;
             return article;
         }
 
-        function render() {
+        function renderPosts() {
             const q = searchQuery.trim().toLowerCase();
 
-            // Tag cloud
-            tagCloud.innerHTML = '';
-            allTags.forEach(t => tagCloud.appendChild(buildTagEl(t)));
-
-            // Active filter badge
-            if (activeTag) {
-                activeFilter.hidden = false;
-                activeLabel.textContent = activeTag;
-            } else {
-                activeFilter.hidden = true;
-            }
-
-            // Filter posts
             const visible = POSTS.filter(post => {
                 const tagMatch  = !activeTag || post.tags.includes(activeTag);
                 const textMatch = !q ||
@@ -129,8 +171,7 @@
                 return tagMatch && textMatch;
             });
 
-            postList.innerHTML = '';
-            visible.forEach(p => postList.appendChild(buildPostEl(p)));
+            postList.replaceChildren(...visible.map(buildPostEl));
             noResults.hidden = visible.length > 0;
         }
 
@@ -139,11 +180,13 @@
 
         searchInput.addEventListener('input', () => {
             searchQuery = searchInput.value;
-            render();
+            renderPosts();
         });
 
         // ── Initial render ─────────────────────────────────────────────────
-        render();
+        renderTags();
+        updateActiveFilter();
+        renderPosts();
     </script>
     <script src="../site.js" defer></script>
 </body>
