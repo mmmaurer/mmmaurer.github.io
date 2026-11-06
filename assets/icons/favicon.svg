@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Maximilian Maurer">
+  <style>
+    .plate { fill: #17697a; }
+    .mark { stroke: #ffffff; }
+
+    /* Match the site's dark-mode accent instead of using a dim teal tab. */
+    @media (prefers-color-scheme: dark) {
+      .plate { fill: #9ccfd8; }
+      .mark { stroke: #17161f; }
+    }
+  </style>
+  <rect class="plate" width="64" height="64" rx="15"/>
+  <path class="mark" d="M18 46V19l14 17 14-17v27"
+        fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
