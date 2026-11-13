@@ -5,9 +5,13 @@ and blog/tags.html.
 
 Usage:
     python convert_post.py "/path/to/Obsidian Vault/Blog/Post.md"
+    python convert_post.py "/path/to/Obsidian Vault/Blog/Post.md" --add-news
 
 Images referenced with Obsidian's ![[file.jpg]] syntax are copied from
 the vault's attachments folder into assets/img/blog/.
+
+With ``--add-news`` a news item "New blog post: <title>" is also added to
+index.html, where the title links to the new post.
 """
 
 import argparse
@@ -16,11 +20,13 @@ import json
 import re
 import shutil
 import sys
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
 
 import markdown as md_lib
 import yaml
+
+import add_news
 
 # ── Configurable paths ─────────────────────────────────────────────────────────
 WEBSITE_ROOT      = Path(__file__).resolve().parent
@@ -28,6 +34,7 @@ BLOG_DIR          = WEBSITE_ROOT / "blog"
 ASSETS_BLOG_IMG   = WEBSITE_ROOT / "assets" / "img" / "blog"
 BLOG_HTML         = WEBSITE_ROOT / "blog.html"
 TAGS_HTML         = WEBSITE_ROOT / "blog" / "tags.html"
+INDEX_HTML        = WEBSITE_ROOT / "index.html"
 
 
 # ── Parsing ────────────────────────────────────────────────────────────────────
@@ -111,11 +118,18 @@ def _find_attachment(fname: str, src: Path) -> Path | None:
         directory = parent
 
 
+def parse_date(val) -> date:
+    """Coerce a YAML date, datetime, or ISO date string to a date."""
+    if isinstance(val, datetime):
+        return val.date()
+    if isinstance(val, str):
+        return datetime.strptime(val, "%Y-%m-%d").date()
+    return val
+
+
 def format_date(val) -> str:
     """Format a date or ISO string to 'Month D, YYYY'."""
-    if isinstance(val, str):
-        val = datetime.strptime(val, "%Y-%m-%d").date()
-    return val.strftime("%B %-d, %Y")
+    return parse_date(val).strftime("%B %-d, %Y")
 
 
 # ── HTML generation ────────────────────────────────────────────────────────────
@@ -268,11 +282,29 @@ def main() -> None:
         description="Convert an Obsidian blog entry to an HTML page."
     )
     parser.add_argument("input", help="Path to the Obsidian Markdown file")
+    parser.add_argument(
+        "--add-news",
+        action="store_true",
+        help=(
+            'also add the news item "New blog post: <title>" to index.html, '
+            "linking to the new post"
+        ),
+    )
     args = parser.parse_args()
 
     src = Path(args.input).expanduser().resolve()
     if not src.exists():
         sys.exit(f"Error: file not found: {src}")
+
+    # Read the news page up front so a broken index.html is reported before
+    # any files are written.
+    news_page = ""
+    if args.add_news:
+        if not INDEX_HTML.exists():
+            sys.exit(f"Error: news page not found: {INDEX_HTML}")
+        news_page = INDEX_HTML.read_text(encoding="utf-8")
+        if add_news.NEWS_LIST_MARKER not in news_page:
+            sys.exit(f"Error: no news list found in {INDEX_HTML}")
 
     raw = src.read_text(encoding="utf-8")
     fm, body = parse_frontmatter(raw)
@@ -315,6 +347,30 @@ def main() -> None:
     print(f"  Updated:  blog.html")
     update_tags_html(title, date_str, tags, excerpt, post_filename)
     print(f"  Updated:  blog/tags.html")
+
+    # Announce the post in the news section of index.html
+    if args.add_news:
+        post_url = f"blog/{post_filename}"
+        news_text = f"New blog post: {title}"
+        news_html = (
+            f'New blog post: <a href="{post_url}">'
+            f'{html_lib.escape(title, quote=False)}</a>'
+        )
+        try:
+            result = add_news.upsert_news_item(
+                news_page,
+                message=news_text,
+                date_str=parse_date(date_val).isoformat(),
+                message_html=news_html,
+                match_href=post_url,
+            )
+        except ValueError as error:
+            sys.exit(f"Error: could not add the news item: {error}")
+        INDEX_HTML.write_text(result.html, encoding="utf-8")
+        print(
+            f"  Updated:  index.html "
+            f"(news item at position {result.position} of {result.total})"
+        )
 
     print(f"\nDone — post live at blog/{post_filename}")
 
